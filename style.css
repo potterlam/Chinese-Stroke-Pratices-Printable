@@ -1,0 +1,437 @@
+:root {
+    --bg-color: #f7f9fa;
+    --card-bg: #ffffff;
+    --border-color: #d1d5db;
+    --text-main: #1f2937;
+    --text-muted: #6b7280;
+    --accent: #3b82f6;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --grid-line: #fecaca; /* Light red for practice boxes */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    padding: 20px;
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.page-header button {
+    background-color: var(--accent);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    box-shadow: var(--shadow);
+}
+
+.page-header button:hover {
+    background-color: #2563eb;
+}
+
+#app-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+}
+
+/* Worksheet Card layout */
+.worksheet-card {
+    background-color: var(--card-bg);
+    width: 1100px;
+    min-height: 1550px; /* Closely matches A4 portrait aspect ratio */
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    page-break-after: always;
+}
+
+/* Top Section uses Grid to match relative placement */
+.top-section {
+    display: grid;
+    grid-template-columns: 483px 1fr;
+    gap: 20px 40px;
+}
+
+.left-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.right-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Components Styling */
+.box {
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background-color: #fafafa;
+    overflow: hidden; /* Prevent content spilling */
+}
+
+.box-label {
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    z-index: 2; /* Keep labels on top */
+}
+
+.box-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding: 20px;
+    z-index: 1; /* Content above background lines */
+}
+
+/* Component 1: Word */
+.word-box {
+    height: 339px;
+    font-size: 140px;
+    font-weight: normal;
+}
+
+.word-character {
+    position: relative;
+    z-index: 1; /* Ensures text stays above dashed lines */
+}
+
+/* Component 5: Meaning */
+.meaning-box {
+    height: 144px;
+    font-size: 32px;
+    font-weight: 500;
+}
+
+/* Components 14, 15, 6 */
+.pronunciation-row {
+    display: flex;
+    gap: 15px;
+    width: 100%;
+}
+
+.jyutping-box, .pinyin-box, .pic-box {
+    flex: 1;
+    height: 190px;
+    font-size: 32px;
+}
+
+.pic-box .box-content {
+    padding: 10px;
+    margin-top: 15px; /* Offset the image below the label */
+}
+
+.pic-box img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    opacity: 0.5; /* placeholder style */
+}
+
+/* Component 4 & 7 */
+.stroke-name-box {
+    width: 100%;
+    height: 110px;
+    font-size: 24px;
+}
+
+.stroke-example-box {
+    width: 100%;
+    height: 143px;
+    font-size: 24px;
+}
+
+.stroke-example-box .box-content, .stroke-name-box .box-content {
+    word-break: break-all; /* Ensure lengthy stroke names/orders wrap inside the box */
+}
+
+/* Bottom Section (Practice grid) */
+.bottom-section {
+    flex: 1; /* Makes bottom section expand to fill available height */
+    display: flex;
+}
+
+.practice-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr); /* Equal rows filling the space */
+    gap: 30px; /* Increased gap to adjust space comfortably */
+    width: 100%;
+}
+
+.practice-box {
+    border: 2px solid var(--border-color); /* Solid outer border */
+}
+
+/* Pseudo-elements for printable black dashed grid lines */
+.word-box, .practice-box {
+    position: relative;
+    background-color: transparent;
+}
+
+.word-box::before, .practice-box::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    border-top: 2px dashed rgba(0, 0, 0, 0.5); /* ------- in black/gray */
+    z-index: 0;
+}
+
+.word-box::after, .practice-box::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    height: 100%;
+    border-left: 2px dashed rgba(0, 0, 0, 0.5); /* ------- in black/gray */
+    z-index: 0;
+}
+
+@media print {
+    @page { 
+        size: A4 portrait;
+        margin: 1cm;
+    }
+    body {
+        background-color: white;
+        padding: 0;
+    }
+    .page-header {
+        display: none; /* Hide header during print */
+    }
+    .worksheet-card {
+        box-shadow: none;
+        width: 100%;
+        height: 100vh; /* Exactly fills up the A4 paper block */
+        min-height: 100vh;
+        padding: 0;
+        margin: 0 auto;
+        border-radius: 0;
+    }
+    .box {
+        border: 2px solid #000;
+    }
+    .word-box::before, .practice-box::before { border-top: 2px dashed #000; }
+    .word-box::after, .practice-box::after { border-left: 2px dashed #000; }
+}
+/* UI Elements & Attractive Front Page */
+#website-ui {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    margin-bottom: 50px;
+    background-color: var(--bg-color);
+}
+
+.hero {
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+    color: white;
+    padding: 60px 20px;
+    text-align: center;
+    border-radius: 12px;
+    margin-bottom: 40px;
+    box-shadow: var(--shadow);
+}
+
+.hero h1 {
+    font-size: 42px;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.hero p {
+    font-size: 20px;
+    opacity: 0.9;
+}
+
+.controls-section {
+    display: flex;
+    justify-content: center;
+}
+
+.control-panel {
+    background-color: white;
+    padding: 40px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 800px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.control-panel h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+    color: var(--text-main);
+}
+
+.control-panel .desc {
+    color: var(--text-muted);
+    margin-bottom: 30px;
+    font-size: 16px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 30px;
+}
+
+.input-group label {
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: var(--text-main);
+}
+
+.input-group input {
+    width: 100%;
+    padding: 15px 20px;
+    font-size: 18px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.input-group input:focus {
+    border-color: var(--accent);
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.btn {
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.1s, box-shadow 0.15s;
+}
+
+.btn:active {
+    transform: translateY(2px);
+}
+
+.btn.primary {
+    background-color: var(--accent);
+    color: white;
+    box-shadow: 0 4px 6px rgba(59, 130, 246, 0.4);
+}
+.btn.primary:hover {
+    background-color: #2563eb;
+}
+
+.btn.secondary {
+    background-color: #f3f4f6;
+    color: var(--text-main);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+.btn.secondary:hover {
+    background-color: #e5e7eb;
+}
+
+/* Printable Cover Page */
+.cover-page {
+    justify-content: space-around !important;
+    align-items: center;
+    text-align: center;
+    padding: 100px !important;
+    font-family: inherit;
+}
+
+.cover-header {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.cover-title {
+    font-size: 64px;
+    font-weight: 800;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+.cover-subtitle {
+    font-size: 32px;
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+.cover-form {
+    width: 80%;
+    margin-bottom: 150px;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+.form-line {
+    display: flex;
+    align-items: flex-end;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.form-line span {
+    margin-right: 20px;
+}
+
+.form-line .line {
+    flex: 1;
+    border-bottom: 2px solid #000;
+    height: 40px;
+}
+
+.no-print {
+    display: block;
+}
+
+@media print {
+    .no-print {
+        display: none !important;
+    }
+}
+

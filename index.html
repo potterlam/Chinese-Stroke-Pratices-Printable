@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traditional Chinese Word Order Practice</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Website Attractive Front Page (Hidden when printed) -->
+    <div id="website-ui" class="no-print">
+        <header class="hero">
+            <div class="hero-content">
+                <h1>Traditional Chinese Mastery</h1>
+                <p>Beginner Level • Top 200 Essential Characters</p>
+            </div>
+        </header>
+
+        <section class="controls-section">
+            <div class="control-panel">
+                <h2>🖨️ Create Your Custom Worksheet</h2>
+                <p class="desc">Type the characters you want to practice, or print the entire 200-word beginner set. A neat cover page will be automatically generated!</p>
+                
+                <div class="input-group">
+                    <label for="word-input">Selected Characters:</label>
+                    <input type="text" id="word-input" placeholder="e.g. 天地人一二三...">
+                </div>
+                
+                <div class="button-group">
+                    <button id="btn-print-selected" class="btn primary">Print Selected Words</button>
+                    <button id="btn-print-all" class="btn secondary">Print All 200 Words</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <main id="app-container">
+        <!-- Cover page and practice sheets will be injected here by JavaScript -->
+    </main>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
