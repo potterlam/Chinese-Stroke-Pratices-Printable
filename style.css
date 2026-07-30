@@ -189,7 +189,7 @@ body {
 .practice-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(2, 1fr); /* Equal rows filling the space */
+    grid-auto-rows: 1fr;
     gap: 30px; /* Increased gap to adjust space comfortably */
     width: 100%;
 }
