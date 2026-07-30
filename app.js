@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 <div class="bottom-section">
                     <div class="practice-grid">
-                        ${Array.from({ length: Math.max(8, item.strokeName.split(',').filter(x => x.trim()).length) }).map(() => `<div class="box practice-box"></div>`).join('')}
+                        ${Array.from({ length: 8 }).map(() => `<div class="box practice-box"></div>`).join('')}
                     </div>
                 </div>
             `;
