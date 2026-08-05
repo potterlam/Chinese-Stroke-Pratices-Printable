@@ -176,8 +176,23 @@ body {
     font-size: 24px;
 }
 
-.stroke-example-box .box-content, .stroke-name-box .box-content {
-    word-break: break-all; /* Ensure lengthy stroke names/orders wrap inside the box */
+.stroke-name-box .box-content,
+.stroke-example-box .box-content {
+    display: block;
+    height: auto;
+    padding: 18px 16px 12px;
+    line-height: 1.25;
+    white-space: normal;
+    word-break: normal;
+    overflow-wrap: anywhere;
+}
+
+.stroke-name-box .box-content {
+    font-size: 21px;
+}
+
+.stroke-example-box .box-content {
+    font-size: 22px;
 }
 
 /* Bottom Section (Practice grid) */
@@ -250,6 +265,22 @@ body {
     }
     .word-box::before, .practice-box::before { border-top: 2px dashed #000; }
     .word-box::after, .practice-box::after { border-left: 2px dashed #000; }
+
+    .stroke-name-box {
+        height: 120px;
+    }
+
+    .stroke-name-box .box-content {
+        padding: 16px 14px 10px;
+        font-size: 19px;
+        line-height: 1.2;
+    }
+
+    .stroke-example-box .box-content {
+        padding: 18px 14px 12px;
+        font-size: 21px;
+        line-height: 1.2;
+    }
 }
 /* UI Elements & Attractive Front Page */
 #website-ui {
